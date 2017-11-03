@@ -22,7 +22,10 @@ app.post('/', (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
+// handle gets with /draw
+// make api call here and then store count based on card
+// return card and counts
+app.get('/draw', (req, res) => {
 
 });
 

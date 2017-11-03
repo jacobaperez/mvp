@@ -17,15 +17,28 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser());
 
-app.post('/', (req, res) => {
-
-
+// don't think I need this
+app.get('/null', (req, res) => {
+  console.log('Loaded the page, got a new deck!');
 });
 
+let deckId = {}
+
+// app.get('/', (req, res) => {
+//   console.log('Success');
+// })
 // handle gets with /draw
 // make api call here and then store count based on card
 // return card and counts
 app.get('/draw', (req, res) => {
+  // TODO: Make api call to deckID doesn't exist
+  // first check if deckid is defined, if not
+  // create deck with 6 decks
+  console.log('Success from /draw');
+  res.send();
+  // call api for a single card.
+  // do count calculations
+
 
 });
 

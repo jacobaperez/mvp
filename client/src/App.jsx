@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import CardsList from './components/CardsList.jsx';
 import $ from 'jquery';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      card: null,
+      card: "http://deckofcardsapi.com/static/img/7D.png",
       runningCount: 0,
       trueCount: 0,
     }

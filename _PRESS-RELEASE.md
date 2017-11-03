@@ -38,10 +38,10 @@ Once the project moves into development, the press release can be used as a touc
   > Just open the app, specify how many decks you want and how many cards you want drawn at a time, then go.
 
 ## Customer Quote ##
-  > "Thank's to this app, I'm not losing as much now!" - Jeff Ueo
+  > "Thank's to this app, I'm not as much of a loser anymore" - Jeff Ueo
 
 ## Customer Quote ##
   > "I couldn't figure it out, but whoever made this app is amazing and probably really handsome" - Jaime
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > What are you waiting for? Try and start winning TODAY!

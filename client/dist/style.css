@@ -1,0 +1,30 @@
+body {
+  background-color: #7cb2b8
+}
+
+#app {
+  text-align: center
+}
+
+.runningcount {
+  color: rgb(211, 18, 18);
+  display:none;
+  font-weight: bold;
+  font-size: 27px;
+
+}
+
+#runningcount:hover + .runningcount {
+  display: block;
+}
+
+.truecount {
+  color: rgb(211, 18, 18);
+  display:none;
+  font-weight: bold;
+  font-size: 27px;
+}
+
+#truecount:hover + .truecount {
+  display: block;
+}

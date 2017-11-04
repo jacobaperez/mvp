@@ -62,8 +62,10 @@ class App extends React.Component {
         <button type="button" onClick={this.draw.bind(this)}>Draw a card</button>
         <button type="button" onClick={this.newDeck.bind(this)}>Create a new deck!</button>
         <h1>Using 2 decks</h1>
-        <h2>Running count: {this.state.runningCount}</h2>
-        <h2>True count: {this.state.trueCount}</h2>
+        <h2 id="runningcount">Running Count:</h2>
+          <h3 class="runningcount">{this.state.runningCount}</h3>
+        <h2 id="truecount">True count:</h2>
+          <p class="truecount">{this.state.trueCount}</p>
       </div>
     )
   }

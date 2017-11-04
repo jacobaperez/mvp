@@ -1,9 +1,17 @@
 body {
-  background-color: #7cb2b8
+  background-color: #9eabd5
 }
 
 #app {
+  height: 1100px;
+  font-family: 'Playfair Display', serif;
   text-align: center
+
+}
+
+#guideinfo {
+  background-color: rgba(0, 0, 0, 0.18);
+  height: 250px;
 }
 
 .runningcount {

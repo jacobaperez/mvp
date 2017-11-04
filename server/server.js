@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // test db connection
 const db = require('../database/index');
+// const deckfetcher = require('./deckfetcher');
+const request = require('request');
 
 
 let app = express();
@@ -17,11 +19,6 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser());
 
-// don't think I need this
-app.get('/null', (req, res) => {
-  console.log('Loaded the page, got a new deck!');
-});
-
 let deckId = {}
 
 // app.get('/', (req, res) => {
@@ -34,8 +31,39 @@ app.get('/draw', (req, res) => {
   // TODO: Make api call to deckID doesn't exist
   // first check if deckid is defined, if not
   // create deck with 6 decks
+  console.log(deckId['deckId']);
   console.log('Success from /draw');
-  res.send();
+  // If deck has not been gotten then get a new deck.
+  if (!deckId["deckId"]) {
+    let options = {
+      url: `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6`,
+      method: 'get'
+    }
+    request(options, (err, response, body) => {
+      if (err) {
+        console.log("There was an error getting a new deck", err);
+      }
+      deckId["deckId"] = JSON.parse(body).deck_id;
+      let newDeckImg = "http://www.soarselling.com/wp-content/uploads/2012/10/areyoureadybrain-460x355.jpg";
+      res.send(newDeckImg);
+    })
+  } else {
+    let options = {
+      url: `https://deckofcardsapi.com/api/deck/${deckId["deckId"]}/draw/?count=1`,
+      method: 'get'
+    }
+    request(options, (err, response, body) => {
+      if (err) {
+        console.log("There was an error getting a new deck", err);
+      }
+      let card = JSON.parse(body).cards[0].image;
+      res.send(card);
+    })
+
+  }
+
+
+
   // call api for a single card.
   // do count calculations
 

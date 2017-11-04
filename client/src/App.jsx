@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      card: "http://deckofcardsapi.com/static/img/7D.png",
+      card: "http://bit.ly/2iueZl8",
       runningCount: 0,
       trueCount: 0,
     }
@@ -20,8 +20,12 @@ class App extends React.Component {
       type: 'GET',
       success: (cardInfo) => {
         console.log("Successful Get Request");
+        this.setState({
+          card: cardInfo
+        })
         // do a setState in here to change state and
         // cause a rerender.
+        console.log(cardInfo, typeof cardInfo);
       },
       error: (err) => {
         console.log("Error in GET:", err);
@@ -39,6 +43,7 @@ class App extends React.Component {
       <div>
         <CardsList card={this.state.card}/>
         <button type="button" onClick={this.draw.bind(this)}>Draw a card</button>
+        <h1>Using 6 decks</h1>
         <h2>Running count: {this.state.runningCount}</h2>
         <h2>True count: {this.state.trueCount}</h2>
       </div>

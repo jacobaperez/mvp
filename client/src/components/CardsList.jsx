@@ -6,7 +6,8 @@ const CardsList = (props) => {
     <div id="cardlist">
       <h2>Card Counter Trainer</h2>
       {
-        // TODO: accept a card/cards and render a Card comp.
+        // TODO: Leave in brackets to implement a multiple
+        // card draw at a time
         <Card card={props.card}/>
       }
     </div>

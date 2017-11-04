@@ -15,8 +15,14 @@ sequelize
   })
 
 const Count = sequelize.define('count', {
-  runningcount: Sequelize.INTEGER,
-  truecount: Sequelize.FLOAT
+  runningcount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  truecount: {
+    type: Sequelize.FLOAT,
+    defaultValue: 0
+  }
 })
 
 sequelize.sync();

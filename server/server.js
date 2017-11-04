@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // test db connection
-const db = require('../database/index');
+const sequelize = require('../database/index');
 // const deckfetcher = require('./deckfetcher');
 const request = require('request');
 
@@ -20,7 +20,36 @@ app.use(function(req, res, next) {
 app.use(bodyParser());
 
 let deckId = {}
+let deckValues = {
+  "2": 1,
+  "3": 1,
+  "4": 1,
+  "5": 1,
+  "6": 1,
+  "7": 0,
+  "8": 0,
+  "9": 0,
+  "10": -1,
+  "JACK": -1,
+  "QUEEN": -1,
+  "KING": -1,
+  "ACE": -1
+}
 
+app.get('/newdeck', (req, res) => {
+  let options = {
+    url: `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2`,
+    method: 'get'
+  }
+  request(options, (err, response, body) => {
+    if (err) {
+      console.log("There was an error getting a new deck", err);
+    }
+    deckId["deckId"] = JSON.parse(body).deck_id;
+    let newDeckImg = "http://www.soarselling.com/wp-content/uploads/2012/10/areyoureadybrain-460x355.jpg";
+    res.send(newDeckImg);
+  })
+})
 // app.get('/', (req, res) => {
 //   console.log('Success');
 // })
@@ -35,18 +64,7 @@ app.get('/draw', (req, res) => {
   console.log('Success from /draw');
   // If deck has not been gotten then get a new deck.
   if (!deckId["deckId"]) {
-    let options = {
-      url: `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6`,
-      method: 'get'
-    }
-    request(options, (err, response, body) => {
-      if (err) {
-        console.log("There was an error getting a new deck", err);
-      }
-      deckId["deckId"] = JSON.parse(body).deck_id;
-      let newDeckImg = "http://www.soarselling.com/wp-content/uploads/2012/10/areyoureadybrain-460x355.jpg";
-      res.send(newDeckImg);
-    })
+    res.send('bad');
   } else {
     let options = {
       url: `https://deckofcardsapi.com/api/deck/${deckId["deckId"]}/draw/?count=1`,
@@ -56,17 +74,18 @@ app.get('/draw', (req, res) => {
       if (err) {
         console.log("There was an error getting a new deck", err);
       }
-      let card = JSON.parse(body).cards[0].image;
-      res.send(card);
-    })
+      let data = JSON.parse(body);
+      let card = data.cards[0].image;
+      let cardValue = deckValues[data.cards[0].value]
+      let remaining = data.remaining;
 
+      let results = [card, cardValue, remaining];
+      // sequelize.models.count.create({})
+      res.send(results);
+    })    
   }
-
-
-
   // call api for a single card.
   // do count calculations
-
 
 });
 

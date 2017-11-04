@@ -20,22 +20,39 @@ class App extends React.Component {
       type: 'GET',
       success: (cardInfo) => {
         console.log("Successful Get Request");
-        this.setState({
-          card: cardInfo
-        })
-        // do a setState in here to change state and
-        // cause a rerender.
-        console.log(cardInfo, typeof cardInfo);
+        if (cardInfo === 'bad') {
+          console.log('need a new deck!');
+        } else {
+          this.setState({
+            card: cardInfo[0],
+            runningCount: this.state.runningCount + cardInfo[1],
+            trueCount: this.state.trueCount + (this.state.runningCount/cardInfo[2])
+          })
+        }
       },
       error: (err) => {
         console.log("Error in GET:", err);
       }
     })
+  }
 
-    // TODO: make ajax (to /draw) call here to my server
-    // then my server calls the api and stores the count
-    // returns the card image from api and count from db.
-    // inside of ajax -> setState.
+  newDeck() {
+    console.log("clicked");
+    $.ajax({
+      url: 'http://127.0.0.1:3000/newdeck',
+      type: 'GET',
+      success: (cardInfo) => {
+        console.log("Successful Get Request");
+        this.setState({
+          card: cardInfo,
+          runningCount: 0,
+          trueCount: 0
+        })
+      },
+      error: (err) => {
+        console.log("Error in GET:", err);
+      }
+    })
   }
 
   render () {
@@ -43,7 +60,8 @@ class App extends React.Component {
       <div>
         <CardsList card={this.state.card}/>
         <button type="button" onClick={this.draw.bind(this)}>Draw a card</button>
-        <h1>Using 6 decks</h1>
+        <button type="button" onClick={this.newDeck.bind(this)}>Create a new deck!</button>
+        <h1>Using 2 decks</h1>
         <h2>Running count: {this.state.runningCount}</h2>
         <h2>True count: {this.state.trueCount}</h2>
       </div>

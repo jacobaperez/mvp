@@ -1,0 +1,23 @@
+create buttons in <App />
+  - one that allows for checking of stats
+  - one for clearing stats
+
+input in <App>
+  - allow to input guess into db for when stats
+    is wanting to be queried
+
+checking of stats - findAll of values -> true /
+findAll values
+
+inputing into table if guess === count => storing a bool.
+grab by id?
+
+clearing stats = simply just destroy the table
+
+add alert if trying to get card from deck when no deck is There
+OR when the card count is all out.
+
+add alert to make sure that a number is being input into the
+database
+
+don't allow anything other than bool in db

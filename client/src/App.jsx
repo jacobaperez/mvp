@@ -66,6 +66,9 @@ class App extends React.Component {
           <h3 class="runningcount">{this.state.runningCount}</h3>
         <h2 id="truecount">True count:</h2>
           <p class="truecount">{this.state.trueCount}</p>
+        <h2>Basic introduction to counting cards:</h2>
+          <p>Premise: Assign specific cards values, and based on those values
+          predict future outcomes</p>
       </div>
     )
   }

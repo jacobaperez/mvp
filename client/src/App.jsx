@@ -134,7 +134,7 @@ class App extends React.Component {
       <div>
         <Info />
         <CardsList card={this.state.card}/>
-        <h2>{`${this.state.currentStats}%`}</h2>
+        <h2>{`${this.state.currentStats}`}</h2>
         <div>
           <input placeholder="What's the count?"/>
           <button onClick={this.makeGuess.bind(this)}> Make a guess! </button>

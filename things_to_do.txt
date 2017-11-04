@@ -14,7 +14,7 @@ grab by id?
 
 clearing stats = simply just destroy the table
 
-add alert if trying to get card from deck when no deck is There
+DONE--add alert if trying to get card from deck when no deck is There
 OR when the card count is all out.
 
 add alert to make sure that a number is being input into the

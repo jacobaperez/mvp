@@ -14,15 +14,8 @@ sequelize
     console.log("There was an error:", err);
   })
 
-const Count = sequelize.define('count', {
-  runningcount: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
-  truecount: {
-    type: Sequelize.FLOAT,
-    defaultValue: 0
-  }
+const Guesses = sequelize.define('guesses', {
+  guess: Sequelize.BOOLEAN 
 })
 
 sequelize.sync();

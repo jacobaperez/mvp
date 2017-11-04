@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CardsList from './components/CardsList.jsx';
 import $ from 'jquery';
+import Info from './components/Info.jsx';
+import Counts from './components/Counts.jsx';
+import Guess from './components/Guess.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,23 +13,24 @@ class App extends React.Component {
       card: "http://bit.ly/2iueZl8",
       runningCount: 0,
       trueCount: 0,
+      cardsLeft: 0,
     }
   }
 
   draw() {
-    console.log('Draw was clicked!');
     $.ajax({
       url: 'http://127.0.0.1:3000/draw',
       type: 'GET',
       success: (cardInfo) => {
         console.log("Successful Get Request");
         if (cardInfo === 'bad') {
-          console.log('need a new deck!');
+          alert('You need a deck Yo!')
         } else {
+          let trueResult = this.state.runningCount/cardInfo[2] || this.state.trueCount;
           this.setState({
             card: cardInfo[0],
             runningCount: this.state.runningCount + cardInfo[1],
-            trueCount: this.state.trueCount + (this.state.runningCount/cardInfo[2])
+            trueCount: trueResult
           })
         }
       },
@@ -37,7 +41,7 @@ class App extends React.Component {
   }
 
   newDeck() {
-    console.log("clicked");
+    console.log("new deck clicked");
     $.ajax({
       url: 'http://127.0.0.1:3000/newdeck',
       type: 'GET',
@@ -55,20 +59,27 @@ class App extends React.Component {
     })
   }
 
+  makeGuess() {
+    let input = $('input').val();
+    console.log("this was guessed", input );
+  }
+
   render () {
     return (
       <div>
+        <Info />
         <CardsList card={this.state.card}/>
-        <button type="button" onClick={this.draw.bind(this)}>Draw a card</button>
-        <button type="button" onClick={this.newDeck.bind(this)}>Create a new deck!</button>
-        <h1>Using 2 decks</h1>
-        <h2 id="runningcount">Running Count:</h2>
-          <h3 class="runningcount">{this.state.runningCount}</h3>
-        <h2 id="truecount">True count:</h2>
-          <p class="truecount">{this.state.trueCount}</p>
-        <h2>Basic introduction to counting cards:</h2>
-          <p>Premise: Assign specific cards values, and based on those values
-          predict future outcomes</p>
+        <div>
+          <input placeholder="What's the count?"/>
+          <button onClick={this.makeGuess}> Make a guess! </button>
+        </div>
+        <div>
+          <button type="button" onClick={this.draw.bind(this)}>Draw a card</button>
+          <button type="button" onClick={this.newDeck.bind(this)}>Create a new deck!</button>
+        </div>
+        <Guess />
+        <h1>Single deck blackjack</h1>
+        <Counts counts={this.state}/>
       </div>
     )
   }

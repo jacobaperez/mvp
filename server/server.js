@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // test db connection
 const sequelize = require('../database/index');
-// const deckfetcher = require('./deckfetcher');
+const helpers = require('../database/controllers/controller');
 const request = require('request');
 
 
@@ -38,7 +38,7 @@ let deckValues = {
 
 app.get('/newdeck', (req, res) => {
   let options = {
-    url: `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2`,
+    url: `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`,
     method: 'get'
   }
   request(options, (err, response, body) => {
@@ -46,7 +46,7 @@ app.get('/newdeck', (req, res) => {
       console.log("There was an error getting a new deck", err);
     }
     deckId["deckId"] = JSON.parse(body).deck_id;
-    let newDeckImg = "http://www.soarselling.com/wp-content/uploads/2012/10/areyoureadybrain-460x355.jpg";
+    let newDeckImg = "https://thegracecommunity.files.wordpress.com/2011/07/ready.gif";
     res.send(newDeckImg);
   })
 })
@@ -82,7 +82,7 @@ app.get('/draw', (req, res) => {
       let results = [card, cardValue, remaining];
       // sequelize.models.count.create({})
       res.send(results);
-    })    
+    })
   }
   // call api for a single card.
   // do count calculations

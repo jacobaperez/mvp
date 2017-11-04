@@ -10,7 +10,7 @@ const addGuess = function(bool) {
     })
 }
 
-const getGuessesStats = function() {
+const getGuessesStats = function(res) {
   sequelize.models.guesses.findAndCountAll({where :{}})
     .then( result => {
       let rights = result.rows.filter(thing => {
@@ -20,6 +20,7 @@ const getGuessesStats = function() {
       let stats = (rights.length/result.count).toFixed(2);
       console.log(rights.length, result.count, stats);
       console.log("STATS", stats)
+      res.send(stats);
     })
     .catch(err => {
       console.log("Error getting the guesses!!", err);

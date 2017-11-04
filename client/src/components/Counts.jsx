@@ -3,10 +3,12 @@ import React from 'react'
 const Counts = ({counts}) => {
   return (
     <div>
-      <h2 id="runningcount">Running Count:</h2>
-        <h3 className="runningcount">{counts.runningCount}</h3>
-      <h2 id="truecount">True count:</h2>
-        <p className="truecount">{counts.trueCount.toFixed(2)}</p>
+      <h2 id="runningcount">Running Count:
+        <span className="runningcount">{counts.runningCount}</span>
+      </h2>
+      <h2 id="truecount">True count:
+        <span className="truecount">{counts.trueCount.toFixed(2)}</span>
+      </h2>
     </div>
   )
 }

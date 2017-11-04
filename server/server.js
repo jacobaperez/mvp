@@ -36,6 +36,22 @@ let deckValues = {
   "ACE": -1
 }
 
+app.post('/guess', (req, res) => {
+  // console.log(typeof JSON.parse(req.body.guess));
+  let guess = JSON.parse(req.body.guess);
+  helpers.addGuess(guess);
+  res.send();
+})
+
+app.get('/getstats', (req, res) => {
+  helpers.getGuessesStats(res);
+})
+
+app.get('/clearstats', (req, res) => {
+  helpers.clearGuesses();
+  res.send();
+})
+
 app.get('/newdeck', (req, res) => {
   let options = {
     url: `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`,
